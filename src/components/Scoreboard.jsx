@@ -1,5 +1,10 @@
-function Scoreboard(){
-    return <div>Scoreboard</div>
+function Scoreboard({currentScore, bestScore}){
+    return(
+        <div>
+            <p>Score: {currentScore}</p>
+            <p>Best Score: {bestScore}</p>
+        </div>
+    );
 }
 
 export default Scoreboard;
