@@ -1,9 +1,10 @@
 import "./styles/App.css";
 import GameBoard from "./components/GameBoard";
 import Scoreboard from "./components/Scoreboard";
+import Modal from "./components/Modal";
 import {useState, useEffect} from "react";
 
-const POKE_COUNT = 4;
+const POKE_COUNT = 12;
 const POKE_API_URL = "https://pokeapi.co/api/v2/pokemon/";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
   const [bestScore, setBestScore] = useState(0);
   const [fetchTrigger, setFetchTrigger] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [modal, setModal] = useState(null);
   
 
   useEffect(
@@ -54,20 +56,18 @@ function App() {
 
     const handleCardClick = (id) => {
       if(clickedIds.includes(id)) {
-        alert("Game over! You Clicked the same card twice!");
+        setModal('lose');
         setClickedIds([]);
         setCurrentScore(0);
-        setFetchTrigger(prev => prev + 1); // trigger a new fetch
       }
       else{
         const newScore = currentScore + 1;
 
         if(newScore === POKE_COUNT) {
-          alert("Congratulations! You won the game!");
+          setModal('win');
           setClickedIds([]);
           setCurrentScore(0);
           setBestScore(newScore);
-          setFetchTrigger(prev => prev + 1); // trigger a new fetch
         }
         else{
           setClickedIds([...clickedIds, id]);
@@ -77,6 +77,11 @@ function App() {
         }
       }
     }
+
+  const handleModalClose = () => {
+    setModal(null);
+    setFetchTrigger(prev => prev + 1); // trigger a new fetch
+  }
 
   return (
     <div className="app">
@@ -89,6 +94,7 @@ function App() {
       ) : (
         <GameBoard pokemon={pokemon} onCardClick={handleCardClick} />
       )}
+      {modal && <Modal type={modal} onClose={handleModalClose} bestScore={bestScore} />}
     </div>
   );
 }

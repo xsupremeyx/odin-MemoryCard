@@ -147,6 +147,116 @@
     animation: blink 1.2s step-end infinite;
 }
 
+/* ── Modal ── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    max-width: 360px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.25s ease;
+    border-top: 6px solid var(--red);
+}
+
+.modal--win {
+    border-top-color: #FFD700;
+}
+
+.modal--lose {
+    border-top-color: var(--red);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal__icon {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.modal__title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1rem;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+.modal--win .modal__title {
+    color: #B8860B;
+}
+
+.modal__message {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.6;
+}
+
+.modal__btn {
+    margin-top: 0.5rem;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 2rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+    letter-spacing: 0.5px;
+}
+
+.modal__btn:hover {
+    background: var(--red-dark);
+    transform: translateY(-2px);
+}
+
+.modal--win .modal__btn {
+    background: #FFD700;
+    color: #5a4000;
+}
+
+.modal--win .modal__btn:hover {
+    background: #e6c200;
+}
+
 @keyframes blink {
 
     0%,
