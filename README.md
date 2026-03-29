@@ -3,7 +3,7 @@
 A memory card game built with React as part of [The Odin Project](https://www.theodinproject.com/) curriculum.
 
 ## Live Demo:
-[Play the Game](https://link)
+[Play the Game](https://xsupremeyx-poke-memorycard.netlify.app/)
 
 ## How to Play
 
