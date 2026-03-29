@@ -1,9 +1,11 @@
 function Card({pokemon, onCardClick}){
-    return(
-        <div onClick={()=> onCardClick(pokemon.id)}>
-            <img src={pokemon.image} alt={pokemon.name} />
-            <p>{pokemon.name}</p>
+    return (
+      <div className="card" onClick={() => onCardClick(pokemon.id)}>
+        <div className="card__img-wrapper">
+          <img src={pokemon.image} alt={pokemon.name} />
         </div>
+        <p className="card__name">{pokemon.name}</p>
+      </div>
     );
 }
 

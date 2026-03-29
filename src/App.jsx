@@ -3,7 +3,7 @@ import GameBoard from "./components/GameBoard";
 import Scoreboard from "./components/Scoreboard";
 import {useState, useEffect} from "react";
 
-const POKE_COUNT = 12;
+const POKE_COUNT = 4;
 const POKE_API_URL = "https://pokeapi.co/api/v2/pokemon/";
 
 function App() {
@@ -12,12 +12,14 @@ function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [fetchTrigger, setFetchTrigger] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   
 
   useEffect(
     ()=> {
       const fetchPokemon = async () => {
         // generates 12 unique ids b/w 1 and 151
+        setIsLoading(true); 
         const ids = [];
         while (ids.length < POKE_COUNT) {
           const randomId = Math.floor(Math.random() * 151) + 1;
@@ -42,6 +44,7 @@ function App() {
         }));
 
         setPokemon(formatted);
+        setIsLoading(false);
       };
       fetchPokemon();
     },[fetchTrigger]); //run on mount and specific trigger only!
@@ -75,10 +78,19 @@ function App() {
       }
     }
 
-  return <div>
-    <Scoreboard currentScore={currentScore} bestScore={bestScore}/>
-    <GameBoard pokemon={pokemon} onCardClick={handleCardClick}/>
-  </div>;
+  return (
+    <div className="app">
+      <Scoreboard currentScore={currentScore} bestScore={bestScore} />
+      {isLoading ? (
+        <div className="loading">
+          <div className="pokeball"></div>
+          <p>Loading...</p>
+        </div>
+      ) : (
+        <GameBoard pokemon={pokemon} onCardClick={handleCardClick} />
+      )}
+    </div>
+  );
 }
 
 export default App;
