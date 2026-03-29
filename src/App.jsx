@@ -1,11 +1,7 @@
-import './App.css'
+import "./styles/App.css";
 
 function App() {
-  return (
-    <>
-      <div>Hello</div>
-    </>
-  )
+  return <div>Memory Card Game</div>;
 }
 
-export default App
+export default App;
